@@ -1,0 +1,48 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE  #for which service request is coming
+          uri: lb://USER-SERVICE   #When we use Load Balance then we write like this otherwise url
+          predicates:
+            - Path=/users/**
+
+
+        - id: HOTEL-SERVICE  #for which service request is coming
+          uri: lb://HOTEL-SERVICE   #When we use Load Balance then we write like this otherwise url
+          predicates:
+            - Path=/hotels/**
+
+
+        - id: RATING-SERVICE  #for which service request is coming
+          uri: lb://RATING-SERVICE   #When we use Load Balance then we write like this otherwise url
+          predicates:
+            - Path=/ratings/**
+  config:
+      import:
+        - configserver:http://localhost:8086
+
+
+
+#OKTA Configurations
+okta:
+  oauth2:
+    issuer: https://dev-36615249.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oaedr0l30gedGVFr5d7
+    client-secret: LyysPNQuc5wQKgq9guyYukxggQhrLeyO0GojbGpaqrpg99L0gjhcaDkdbTdPSO_U
+    scopes: openid, profile, email, offline_access
+
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8084/eureka  # Replace with your Eureka server's host and port
+#      instance:
+#      prefer-ip-address: true  # Register with the IP address of the instance

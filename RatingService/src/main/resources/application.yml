@@ -1,0 +1,33 @@
+server:
+  port: 8082
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/microservices
+  application:
+    name: RATING-SERVICE
+
+  config:
+    import:
+      - configserver:http://localhost:8086
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8084/eureka  # Replace with your Eureka server's host and port
+#  instance:
+#    prefer-ip-address: true  # Register with the IP address of the instance
+
+
+
+
+okta:
+  oauth2:
+    issuer: https://dev-36615249.okta.com/oauth2/default
+    audience: api://default
+
+
+
+

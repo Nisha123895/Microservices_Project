@@ -1,0 +1,21 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Nisha123895/microservices-Configuration
+          clone-on-start: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8084/eureka  # Replace with your Eureka server's host and port
+  instance:
+    prefer-ip-address: true  # Register with the IP address of the instance
+
+
